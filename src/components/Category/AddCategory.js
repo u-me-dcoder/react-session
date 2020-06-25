@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import axios from 'axios'
+import {AddCategorySchema} from '../../schema/FormSchema'
 export default function AddCategory() {
  
 
@@ -29,11 +30,13 @@ export default function AddCategory() {
           axios(config).then(res=>console.log(res.data))
        
         }}
+        validationSchema={AddCategorySchema}
         
       >
         {(props) => {
          
-            let {values,handleSubmit,handleChange,setFieldValue} =props
+            let {values,handleSubmit,handleChange,setFieldValue,errors,handleBlur,touched} =props
+            console.log('this is the touched object',touched)
             let { name } = values;
           return (
             <form
@@ -47,7 +50,9 @@ export default function AddCategory() {
                   name="name"
                   value={name}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {touched.name && errors.name && <span style={{color:'red'}}>{errors.name}</span>}
               </div>
            
               <div className="form-group">
@@ -56,8 +61,9 @@ export default function AddCategory() {
                   type="file"
                   name="avatar"
                   onChange={e=>setFieldValue('avatar',e.target.files[0])}
-                  
+                  onBlur={handleBlur}
                 />
+                  {touched.avatar && errors.avatar && <span style={{color:'red'}}>{errors.avatar}</span>}
               </div>
 
               <button className="btn btn-primary">Submit</button>
