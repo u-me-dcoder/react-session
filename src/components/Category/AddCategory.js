@@ -16,20 +16,26 @@ export default function AddCategory() {
           name: "",
           avatar: undefined,
         }}
-        onSubmit={(props) => {
-          let formData = new FormData()
-          formData.append('name',props.name)
-          formData.append('avatar',props.avatar)
-          let config = {
-            method: 'post',
-            url: 'http://localhost:5000/api/qa/',
-           
-            data : formData
-          };
-         
-          axios(config).then(res=>console.log(res.data))
-       
-        }}
+          onSubmit={(values,props) => {
+            let {name,avatar} = values
+            let formData = new FormData()
+            formData.append('name',name)
+            formData.append('avatar',avatar)
+        
+      
+            
+            let config = {
+              method: 'post',
+              url: 'http://localhost:5000/api/qa/',
+              data : formData
+            };
+          
+            axios(config).then(res=>{
+              console.log(res)
+              props.resetForm()
+            })
+        
+          }}
         validationSchema={AddCategorySchema}
         
       >

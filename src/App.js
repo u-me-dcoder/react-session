@@ -1,7 +1,8 @@
 import React,{useState, Fragment,useEffect} from "react";
 import AddCategory from "./components/Category/AddCategory";
 import axios from 'axios'
-import "./App.css";
+import "./assets/main.scss";
+
 import CategoryList from "./components/Category/CategoryList";
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
   return(
     <Fragment>
       {loading ? <h1>Loading</h1>:
-        categories.length ===0 ? <AddCategory/> :<CategoryList categories={categories}/>
+        categories.length ===0 ? <AddCategory/> :<CategoryList categories={categories}/> 
       }
       
    </Fragment>
@@ -28,3 +29,5 @@ function App() {
 }
 
 export default App;
+
+
