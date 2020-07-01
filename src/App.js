@@ -20,11 +20,15 @@ function App() {
   },[])
   let addQuestionToBank = (id,bankList)=>{
     let question = bankList[0]
-    let category = categories.filter(item=>item._id===id)
-    let temp = categories.filter(item=>item._id!==id)
-    category[0].bank.push(question)
-    console.log([category,temp])
-    setCategories([...category,...temp])
+    let newState = categories.map(item=>{
+      if(item._id===id){
+        item.bank.push(question)
+      }
+      return item
+      
+
+    })
+    setCategories(newState)
   }
   return(
     <Fragment>
