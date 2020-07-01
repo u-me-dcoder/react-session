@@ -21,7 +21,7 @@ export default function CategoryList(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  let { categories } = props;
+  let { categories,addQuestionToBank } = props;
 
   let addQuestion = (id) => {
     console.log("this is the item id", id);
@@ -36,7 +36,7 @@ export default function CategoryList(props) {
   return (
 
       <div>
-        <AddQuestion isOpen={modal} handleModalState={changeModalState} id={id} />
+        <AddQuestion isOpen={modal} handleModalState={changeModalState} addQuestionToBank={addQuestionToBank} id={id} />
         <Nav tabs>
           {categories.map((item, index) => {
             let tabValue = index + 1;

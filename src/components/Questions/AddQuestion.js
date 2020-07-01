@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import {AddQuestionSchema} from '../../schema/FormSchema'
 import axios from 'axios'
 export default function AddQuestion(props) {
-    let {id,isOpen,handleModalState}= props
+    let {id,isOpen,handleModalState,addQuestionToBank}= props
 
 
   return (
@@ -33,6 +33,7 @@ export default function AddQuestion(props) {
                 console.log(res);
                 props.resetForm();
                 handleModalState()
+                addQuestionToBank(id,res.data)
               });
             }}
            
