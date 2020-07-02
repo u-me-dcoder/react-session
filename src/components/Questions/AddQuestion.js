@@ -30,7 +30,7 @@ export default function AddQuestion(props) {
               };
 
               axios(config).then((res) => {
-                console.log(res);
+               
                 props.resetForm();
                 handleModalState()
                 addQuestionToBank(id,res.data)

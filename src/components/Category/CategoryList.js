@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, {  useState } from "react";
 import {
   TabContent,
   TabPane,
@@ -24,7 +24,7 @@ export default function CategoryList(props) {
   let { categories,addQuestionToBank } = props;
 
   let addQuestion = (id) => {
-    console.log("this is the item id", id);
+    
     setId(id)
     setModal(!modal)
   };

@@ -21,12 +21,8 @@ function App() {
   let addQuestionToBank = (id,bankList)=>{
     let question = bankList[0]
     let newState = categories.map(item=>{
-      if(item._id===id){
-        item.bank.push(question)
-      }
+      if(item._id===id) item.bank.push(question)
       return item
-      
-
     })
     setCategories(newState)
   }
