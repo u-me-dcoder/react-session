@@ -1,30 +1,31 @@
-import React,{useState, Fragment,useEffect} from "react";
+import React,{ Fragment,useEffect} from "react";
 import AddCategory from "./components/Category/AddCategory";
-import axios from 'axios'
+import {connect} from 'react-redux'
+
+import {getCategoryList} from './store/actions/category'
 import "./assets/main.scss";
 
 import CategoryList from "./components/Category/CategoryList";
 
-function App() {
-  let [categories,setCategories] = useState([])
-  let [loading,setLoading]= useState(true)
+function App(props) {
+  let {category,getCategoryList} = props
+  let {loading,categories} = category
+ 
+
   
   useEffect(()=>{
-   axios.get('http://localhost:5000/api/qa').then(res=>{
-     setCategories(res.data)
-     setLoading(false)
- 
-   })
+  getCategoryList()
    
-    
-  },[])
+  },[getCategoryList])
+
+  
   let addQuestionToBank = (id,bankList)=>{
     let question = bankList[0]
     let newState = categories.map(item=>{
       if(item._id===id) item.bank.push(question)
       return item
     })
-    setCategories(newState)
+    // setCategories(newState)
   }
   return(
     <Fragment>
@@ -35,7 +36,10 @@ function App() {
    </Fragment>
    )
 }
+const mapStateToProps = state =>({
+  category:state.category
+})
 
-export default App;
+export default connect(mapStateToProps,{getCategoryList})(App);
 
 
