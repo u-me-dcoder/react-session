@@ -2,9 +2,10 @@ import React from "react";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { Formik } from "formik";
 import {AddQuestionSchema} from '../../schema/FormSchema'
-import axios from 'axios'
-export default function AddQuestion(props) {
-    let {id,isOpen,handleModalState,addQuestionToBank}= props
+import {connect} from 'react-redux'
+import { addQuestion } from "../../store/actions/category";
+ function AddQuestion(props) {
+    let {id,isOpen,handleModalState,addQuestion}= props
 
 
   return (
@@ -20,21 +21,9 @@ export default function AddQuestion(props) {
             }}
             validationSchema={AddQuestionSchema}
             onSubmit={(values, props) => {
-        
-            
-
-              let config = {
-                method: "put",
-                url: `http://localhost:5000/api/qa/category/${id}`,
-                data: values,
-              };
-
-              axios(config).then((res) => {
-               
+              addQuestion(id,values)
                 props.resetForm();
                 handleModalState()
-                addQuestionToBank(id,res.data)
-              });
             }}
            
           >
@@ -104,3 +93,4 @@ export default function AddQuestion(props) {
     </div>
   );
 }
+export default connect(null,{addQuestion})(AddQuestion)

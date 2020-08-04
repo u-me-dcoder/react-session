@@ -1,9 +1,12 @@
 import React from "react";
 import { Formik } from "formik";
-import axios from 'axios'
+import {connect} from 'react-redux'
+
 import {AddCategorySchema} from '../../schema/FormSchema'
-export default function AddCategory() {
- 
+import { addCategory } from "../../store/actions/category";
+ function AddCategory(props) {
+  
+  let {addCategory} = props
 
  
 
@@ -22,18 +25,9 @@ export default function AddCategory() {
             formData.append('name',name)
             formData.append('avatar',avatar)
         
-      
-            
-            let config = {
-              method: 'post',
-              url: 'http://localhost:5000/api/qa/',
-              data : formData
-            };
-          
-            axios(config).then(res=>{
-              console.log(res)
+              addCategory(formData)
               props.resetForm()
-            })
+          
         
           }}
         validationSchema={AddCategorySchema}
@@ -81,3 +75,4 @@ export default function AddCategory() {
     </div>
   );
 }
+export default connect(null,{addCategory})(AddCategory)

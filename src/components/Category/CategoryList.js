@@ -15,7 +15,7 @@ function CategoryList(props) {
     if (activeTab !== tab) setActiveTab(tab);
   };
 
-  let { categories, addQuestionToBank, filter, setTextFilter,setLevelFilter } = props;
+  let { categories, filter, setTextFilter,setLevelFilter } = props;
   let { text, level} = filter;
 
   let addQuestion = (id) => {
@@ -53,7 +53,6 @@ function CategoryList(props) {
       <AddQuestion
         isOpen={modal}
         handleModalState={changeModalState}
-        addQuestionToBank={addQuestionToBank}
         id={id}
       />
       <Nav tabs>
