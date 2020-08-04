@@ -21,7 +21,9 @@ import { addQuestion } from "../../store/actions/category";
             }}
             validationSchema={AddQuestionSchema}
             onSubmit={(values, props) => {
-              addQuestion(id,values)
+              addQuestion(id,values).then((response)=>{
+                console.log('promise response',response)
+              })
                 props.resetForm();
                 handleModalState()
             }}

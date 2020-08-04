@@ -44,8 +44,15 @@ export const addQuestion = (id,values)=> async dispatch =>{
             url: `http://localhost:5000/api/qa/category/${id}`,
             data: values,
           };
-        let res= await axios(config)
-
+        let res= await axios(config).then((res)=>{
+            console.log('response',res)
+        })
+         
+        let apiPromise = new Promise((resolve,reject)=>{
+            resolve(true);
+            reject(false)
+        }) 
+        
         dispatch({
             type:ADD_QUESTION,
             payload:{
@@ -53,6 +60,9 @@ export const addQuestion = (id,values)=> async dispatch =>{
                 bankList:res.data
             }
         })
+
+        return apiPromise
+    
 
     } catch (error) {
         console.log(error)
